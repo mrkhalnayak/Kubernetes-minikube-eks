@@ -1,0 +1,14 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: staging-admin
+  namespace: staging
+subjects: 
+  - kind: ServiceAccount  # here we are not creating the service account in the staging namespace but using the service account of dev namespace.
+    name: dev-sa
+    namespace: dev
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
